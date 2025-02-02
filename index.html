@@ -19,6 +19,23 @@
         @keyframes blink {
             50% { opacity: 0; }
         }
+        nav ul {
+            list-style-type: none; /* إلغاء النقاط */
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: limegreen;
+            font-size: 1.2em;
+        }
+        nav ul li a:hover {
+            color: darkgreen;
+        }
         .button {
             background-color: limegreen;
             color: black;
@@ -27,18 +44,146 @@
             cursor: pointer;
             font-size: 1.2em;
             margin: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
         .button:hover {
             background-color: darkgreen;
             color: white;
+            transform: scale(1.1);
+        }
+        section {
+            margin-top: 30px;
+            display: none;
+        }
+        section.active {
+            display: block;
+        }
+        section h2 {
+            font-size: 2em;
+            text-decoration: underline;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        /* New styles for Contact form */
+        form {
+            background-color: #1c3b1f; /* Dark green background */
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        form label {
+            color: limegreen;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid limegreen;
+            background-color: #2d572f;
+            color: white;
+            font-size: 1.1em;
+            border-radius: 5px;
+        }
+        form input:focus, form textarea:focus {
+            outline: none;
+            border-color: darkgreen;
+            background-color: #3b7f50;
+        }
+        form button {
+            background-color: limegreen;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 5px;
+        }
+        form button:hover {
+            background-color: darkgreen;
+            color: white;
+            transform: scale(1.1);
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .button {
+                width: 100%;
+                font-size: 1.1em;
+            }
         }
     </style>
 </head>
 <body>
     <h1>Welcome to My Pentesting World</h1>
+    <img src="https://via.placeholder.com/150" alt="My Picture" class="profile-img">
     <p>Ethical Hacking & Security</p>
-    <button class="button">About Me</button>
-    <button class="button">Services</button>
-    <button class="button">Contact</button>
+
+    <nav>
+        <ul>
+            <li><button class="button" onclick="showContent('about')">About Me</button></li>
+            <li><button class="button" onclick="showContent('services')">Services</button></li>
+            <li><button class="button" onclick="showContent('contact')">Contact</button></li>
+        </ul>
+    </nav>
+
+    <section id="about" class="content-section">
+        <h2>About Me</h2>
+        <p>I'm an ethical hacker with a passion for penetration testing and network security. I specialize in identifying vulnerabilities in web applications, networks, and systems, and securing them against potential threats.</p>
+    </section>
+
+    <section id="services" class="content-section">
+        <h2>Services</h2>
+        <div>
+            <p>Pentesting Web Applications</p>
+            <p>Network Penetration Testing</p>
+            <p>Vulnerability Assessments</p>
+        </div>
+    </section>
+
+    <section id="contact" class="content-section">
+        <h2>Contact</h2>
+        <form action="mailto:morcosemad00@gmail.com" method="post" enctype="text/plain">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+    <script>
+        function showContent(contentId) {
+            // Hide all sections
+            var sections = document.querySelectorAll('.content-section');
+            sections.forEach(function(section) {
+                section.classList.remove('active');
+            });
+
+            // Show the clicked section
+            var activeSection = document.getElementById(contentId);
+            if (activeSection) {
+                activeSection.classList.add('active');
+            }
+        }
+    </script>
 </body>
 </html>

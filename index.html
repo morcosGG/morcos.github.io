@@ -9,8 +9,9 @@
         body {
             margin: 0;
             overflow: hidden;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Fira Code', monospace;
             color: limegreen;
+            background: black;
             position: relative;
         }
 
@@ -21,9 +22,8 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            object-fit: cover;  
+            object-fit: cover;
             z-index: -1;
-            pointer-events: none; 
         }
 
         /* Matrix Effect */
@@ -40,11 +40,11 @@
         .matrix-column {
             display: inline-block;
             width: 1em;
-            font-size: 20px;
+            font-size: 18px;
             writing-mode: vertical-rl;
             text-orientation: upright;
             white-space: nowrap;
-            color: limegreen;
+            color: rgba(0, 255, 0, 0.7);
             animation: fall linear infinite;
         }
 
@@ -52,6 +52,16 @@
             to {
                 transform: translateY(100vh);
             }
+        }
+
+        /* Blink with Glow Effect */
+        @keyframes blink {
+            50% { opacity: 0; text-shadow: 0 0 20px limegreen; }
+        }
+
+        .blink {
+            animation: blink 1s infinite alternate;
+            text-shadow: 0 0 20px limegreen;
         }
 
         /* Content Styles */
@@ -62,221 +72,105 @@
             padding: 50px;
         }
 
-        h1 {
-            font-size: 3em;
-            animation: blink 1s infinite;
+        h1, h2, p {
+            text-shadow: 0 0 15px limegreen;
         }
 
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
-
-        .hero-text h1 {
-            font-size: 1.5em;
-            margin-top: 20px;
-            line-height: 1.6;
-        }
-
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
+        h1.blink {
+            animation: blink 1s infinite alternate;
         }
 
         .button {
             background-color: limegreen;
             color: black;
             padding: 10px 20px;
-            border: none;
+            border: 2px solid darkgreen;
             cursor: pointer;
             font-size: 1.2em;
-            margin: 10px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: 0.3s ease;
+            box-shadow: 0 0 5px limegreen;
         }
 
         .button:hover {
             background-color: darkgreen;
             color: white;
             transform: scale(1.1);
+            box-shadow: 0 0 10px limegreen;
         }
 
         section {
-            margin-top: 30px;
             display: none;
-            background-color: transparent;
-            border: none;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 80%;
+            box-shadow: 0 0 10px limegreen;
         }
 
         section.active {
             display: block;
+            animation: fadeIn 0.5s ease-in-out;
         }
 
-        section h2 {
-            font-size: 2em;
-            text-decoration: underline;
-        }
-
-       
-        #contact {
-            background-color: rgba(0, 0, 0, 0.7);  
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact-info {
-            background-color: transparent;  
-            padding: 20px;
-            text-align: center; 
-            color: limegreen;  
-        }
-
-        .contact-info h3 {
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-
-        .contact-info p {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-
-        .contact-info a {
-            color: limegreen;
-            font-size: 1.5em;  
-            text-decoration: none;  
-        }
-
-        .contact-info a:hover {
-            color: darkgreen;
-        }
-
-       
-        section h2 {
-            font-size: 2em;
-            color: limegreen;
-            text-decoration: underline;
-            margin-bottom: 20px;
-        }
-
-        section p {
-            font-size: 1.2em;
-            color: limegreen;
-        }
-
-        @media (max-width: 600px) {
-            .content {
-                padding: 20px;
-            }
-            h1 {
-                font-size: 2em;
-            }
-            .button {
-                width: 100%;
-                font-size: 1.1em;
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <!-- Video Background -->
-    <video id="video-background" autoplay loop >
+    <video id="video-background" autoplay loop muted>
         <source src="https://videos.pexels.com/video-files/11584395/11584395-uhd_2560_1440_60fps.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
-    <!-- Matrix Effect -->
     <div id="matrix"></div>
-
-    <!-- Content -->
     <div class="content">
-        <h1>Welcome to My Pentesting World</h1>
-        <h2><p>Ethical Hacking & Security</p></h2>
-
-        <div class="hero-text">
-            <h3 style="color: white;">Every day, hackers around the world are scanning the web for vulnerable websites to target</h3>
-            <h1 style="font-size: 3em;">And yours could be next.</h1>
-        </div>
-
+        <h1 class="blink">Welcome to My Pentesting World</h1>
+        <h2>Ethical Hacking & Security</h2>
+        <p>Every day, hackers around the world are scanning the web for vulnerable websites to target</p>
+        <h1 class="blink">And yours could be next.</h1>
         <nav>
-            <ul>
-                <li><button class="button" onclick="showContent('about')">About Me</button></li>
-                <li><button class="button" onclick="showContent('services')">Services</button></li>
-                <li><button class="button" onclick="showContent('contact')">Contact</button></li>
-            </ul>
+            <button class="button" onclick="showContent('about')">About Me</button>
+            <button class="button" onclick="showContent('services')">Services</button>
+            <button class="button" onclick="showContent('contact')">Contact</button>
         </nav>
-
-        <section id="about" class="content-section">
+        <section id="about">
             <h2>About Me</h2>
             <p>I'm an ethical hacker with a passion for penetration testing and network security. I specialize in identifying vulnerabilities in web applications, networks, and systems, and securing them against potential threats.</p>
         </section>
-
-        <section id="services" class="content-section">
+        <section id="services">
             <h2>Services</h2>
-            <div>
-                <p>Pentesting Web Applications</p>
-                <p>Network Penetration Testing</p>
-                <p>Vulnerability Assessments</p>
-            </div>
+            <p>Pentesting Web Applications, Network Penetration Testing, Vulnerability Assessments.</p>
         </section>
-
-        <section id="contact" class="content-section">
+        <section id="contact">
             <h2>Contact</h2>
-            <div class="contact-info">
-                <p>If you want to reach out for collaborations or inquiries, feel free to email me at:</p>
-                <p><a href="mailto:morcosemad00@gmail.com">morcosemad00@gmail.com</a></p>
-            </div>
+            <p>Email: <a href="mailto:morcosemad00@gmail.com">morcosemad00@gmail.com</a></p>
         </section>
     </div>
 
     <script>
-        // Show/Hide Sections
         function showContent(contentId) {
-            const sections = document.querySelectorAll('.content-section');
-            sections.forEach(section => section.classList.remove('active'));
-            const activeSection = document.getElementById(contentId);
-            if (activeSection) {
-                activeSection.classList.add('active');
-            }
+            document.querySelectorAll('section').forEach(section => section.classList.remove('active'));
+            document.getElementById(contentId).classList.add('active');
         }
 
-        // Matrix Background Animation with 0 and 1
         const matrix = document.getElementById('matrix');
         const characters = '01';
-        const columns = Math.floor(window.innerWidth / 16); // Adjust based on font size
-
+        const columns = Math.floor(window.innerWidth / 20);
         for (let i = 0; i < columns; i++) {
             const column = document.createElement('div');
             column.className = 'matrix-column';
-            column.style.animationDuration = `${Math.random() * 5 + 3}s`; // Randomize speed
-            column.style.animationDelay = `${Math.random() * 2}s`; // Randomize delay
+            column.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            column.style.animationDelay = `${Math.random() * 1}s`;
             matrix.appendChild(column);
-
             let text = '';
             for (let j = 0; j < 50; j++) {
                 text += characters[Math.floor(Math.random() * characters.length)] + '<br>';
             }
             column.innerHTML = text;
         }
-        // Ensure video plays after page refresh
-        window.onload = function() {
-            var video = document.getElementById("video-background");
-            video.play();
-        };
     </script>
 </body>
 </html>

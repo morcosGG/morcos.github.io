@@ -28,7 +28,6 @@
             transform: translateZ(0);
             will-change: transform;
             transition: all 1s ease;
-            /* Removing brightness filter to maintain the brightness */
         }
 
         /* Matrix Effect */
@@ -94,7 +93,7 @@
             background-color: limegreen;
             color: black;
             padding: 15px 25px;
-            border: 3px solid #003300; /* Dark Green Border */
+            border: 3px solid #003300;
             cursor: pointer;
             font-size: 1.5em;
             transition: all 0.5s ease-in-out;
@@ -103,7 +102,7 @@
         }
 
         .button:hover {
-            background-color: #003300; /* Dark Green on Hover */
+            background-color: #003300;
             transform: scale(1.2) rotate(10deg);
             box-shadow: 0 0 40px limegreen, 0 0 60px limegreen inset;
             color: white;
@@ -121,8 +120,6 @@
             margin: 20px auto;
             width: 80%;
             box-shadow: 0 0 10px limegreen;
-            transform: translateZ(0);
-            will-change: transform;
         }
 
         section.active {
@@ -148,6 +145,11 @@
             color: deepskyblue;
             text-shadow: 0 0 15px deepskyblue;
             font-size: 1.2em;
+            text-decoration: none; /* إزالة الخط تحت الرابط */
+        }
+
+        .email:visited {
+            color: deepskyblue; /* ثابت اللون بعد الضغط */
         }
 
         /* Increased font size for "And yours could be next." */
@@ -193,7 +195,7 @@
 </head>
 <body>
     <video id="video-background" autoplay loop muted>
-        <source src="https://videos.pexels.com/video-files/11584395/11584395-uhd_2560_1440_60fps.mp4" type="video/mp4"> <!-- الفيديو الأصلي -->
+        <source src="https://videos.pexels.com/video-files/11584395/11584395-uhd_2560_1440_60fps.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
@@ -218,8 +220,8 @@
         </section>
         <section id="contact">
             <h2>Contact</h2>
-            <p>Email: <a href="mailto:morcosemad00@gmail.com" class="email">morcosemad00@gmail.com</a></p>
-            <p>WhatsApp: <a href="https://wa.me/201205750253" class="phone">+201205750253</a></p>
+            <p>Email: <a href="mailto:morcosemad00@gmail.com?subject=Message from Website&body=Hello, I would like to contact you regarding..." class="email" target="_blank" id="emailLink">morcosemad00@gmail.com</a></p>
+            <p>WhatsApp: <a href="https://wa.me/201205750253" class="phone" target="_blank">+201205750253</a></p>
         </section>
     </div>
 
@@ -228,6 +230,18 @@
     </div>
 
     <script>
+        // Fix for mailto link that opens a blank page.
+        document.getElementById("emailLink").addEventListener("click", function(event) {
+            var mailtoLink = event.target.href;
+            var mailtoWindow = window.open(mailtoLink, "_blank");
+            if (mailtoWindow) {
+                mailtoWindow.location = mailtoLink;
+            } else {
+                alert("Please allow popups for this website.");
+            }
+            event.preventDefault();
+        });
+
         function showContent(contentId) {
             document.querySelectorAll('section').forEach(section => section.classList.remove('active'));
             document.getElementById(contentId).classList.add('active');

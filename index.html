@@ -117,6 +117,21 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+
+        /* New Styling for Email and Phone */
+        .email, .phone {
+            color: deepskyblue;
+            text-shadow: 0 0 15px deepskyblue;
+            font-size: 1.2em;
+        }
+
+        /* Increased font size for "And yours could be next." */
+        #nextText {
+            font-size: 3em;
+            font-weight: bold;
+            text-shadow: 0 0 30px limegreen;
+        }
+
     </style>
 </head>
 <body>
@@ -130,7 +145,7 @@
         <h1 class="blink">Welcome to My Pentesting World</h1>
         <h2>Ethical Hacking & Security</h2>
         <p>Every day, hackers around the world are scanning the web for vulnerable websites to target</p>
-        <h1 class="blink">And yours could be next.</h1>
+        <h1 class="blink" id="nextText">And yours could be next.</h1>
         <nav>
             <button class="button" onclick="showContent('about')">About Me</button>
             <button class="button" onclick="showContent('services')">Services</button>
@@ -146,7 +161,8 @@
         </section>
         <section id="contact">
             <h2>Contact</h2>
-            <p>Email: <a href="mailto:morcosemad00@gmail.com">morcosemad00@gmail.com</a></p>
+            <p>Email: <a href="mailto:morcosemad00@gmail.com" class="email">morcosemad00@gmail.com</a></p>
+            <p>WhatsApp: <a href="https://wa.me/201205750253" class="phone">+201205750253</a></p>
         </section>
     </div>
 

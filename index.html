@@ -5,18 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pentesting Homepage</title>
     <style>
-        /* General Styles */
+        /* General Styles - Reduced animation and refined colors */
         body {
             margin: 0;
-            overflow: hidden;
-            font-family: 'Fira Code', monospace;
-            color: limegreen;
-            background: linear-gradient(45deg, #111, #333);
+            overflow-x: hidden;
+            overflow-y: auto; /* Change to auto to only show scroll when needed */
+            -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+            scroll-behavior: smooth; /* Add smooth scrolling for anchor links */
+            font-family: 'Roboto', sans-serif;
+            color: #00ff00; /* Matrix green, keep for theme */
+            background: #000000; /* Solid black background for speed and pro look */
             position: relative;
-            cursor: url('https://cdn.pixabay.com/photo/2018/03/05/16/10/mouse-3194372_960_720.png'), auto;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%2300ff00"><circle cx="12" cy="12" r="10" stroke="%2300ff00" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="2" fill="%2300ff00"/></svg>'), auto;
         }
 
-        /* Video Background */
+        /* Video Background - Optional, can be removed for speed if needed */
         #video-background {
             position: fixed;
             top: 0;
@@ -27,10 +30,9 @@
             z-index: -1;
             transform: translateZ(0);
             will-change: transform;
-            transition: all 1s ease;
+            opacity: 0.7; /* Slightly less opaque */
         }
 
-        /* Matrix Effect */
         #matrix {
             position: absolute;
             top: 0;
@@ -44,12 +46,13 @@
         .matrix-column {
             display: inline-block;
             width: 1em;
-            font-size: 18px;
+            font-size: 16px; /* Slightly smaller font for less visual clutter */
             writing-mode: vertical-rl;
             text-orientation: upright;
             white-space: nowrap;
-            color: rgba(0, 255, 0, 0.7);
-            animation: fall linear infinite;
+            color: rgba(0, 255, 0, 0.5); /* Less bright matrix green */
+            animation: fall linear infinite 15s; /* Slower animation for less distraction */
+            text-shadow: none; /* Removed text-shadow for cleaner look and speed */
         }
 
         @keyframes fall {
@@ -58,81 +61,110 @@
             }
         }
 
-        /* Blink with Glow Effect */
+        /* Blink Effect - Removed for a more professional look */
+        /*
         @keyframes blink {
-            50% { opacity: 0; text-shadow: 0 0 20px limegreen; }
+            50% { opacity: 0; text-shadow: 0 0 15px #64ffda; }
         }
 
         .blink {
             animation: blink 1s infinite alternate;
-            text-shadow: 0 0 20px limegreen;
+            text-shadow: 0 0 15px #64ffda;
         }
+        */
 
-        /* Content Styles */
+        /* Content Styles - Cleaner and more professional */
         .content {
             position: relative;
             z-index: 1;
             text-align: center;
-            padding: 50px;
+            padding: 40px; /* Slightly reduced padding */
+            background-color: rgba(0, 0, 0, 0.8); /* Less opaque background */
+            border-radius: 5px; /* Less rounded corners for a sharper look */
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2); /* Subtler shadow */
+            margin: 20px auto;
+            max-width: 90%;
+            border: 1px solid #00ff00;
         }
 
         h1, h2, p {
-            text-shadow: 0 0 15px limegreen;
-            background: linear-gradient(45deg, limegreen, deepskyblue);
+            background: none; /* Removed gradient text for cleaner look and speed */
             -webkit-background-clip: text;
-            color: transparent;
-            font-family: 'Fira Code', monospace;
-            letter-spacing: 0.05em;
+            color: #00ff00; /* Solid green color for headings and text */
+            font-family: 'Roboto Mono', monospace;
+            letter-spacing: 0.03em; /* Slightly reduced letter spacing */
         }
 
-        h1.blink {
-            animation: blink 1s infinite alternate;
+        h1 {
+            font-size: 2.2em; /* Slightly smaller main heading */
         }
 
+        h2 {
+            font-size: 1.8em;
+        }
+
+        /* Button Styles - Subtler hover and effects */
         .button {
-            background-color: limegreen;
-            color: black;
-            padding: 15px 25px;
-            border: 3px solid #003300;
+            background-color: transparent;
+            color: #00ff00;
+            padding: 10px 20px; /* Reduced padding */
+            border: 1px solid #00ff00; /* Thinner border */
             cursor: pointer;
-            font-size: 1.5em;
-            transition: all 0.5s ease-in-out;
-            border-radius: 10px;
-            box-shadow: 0 0 15px limegreen, 0 0 30px limegreen inset;
+            font-size: 1em; /* Slightly smaller font size */
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out; /* Smoother and faster transitions */
+            border-radius: 3px; /* Less rounded corners */
+            box-shadow: none; /* Removed default box-shadow for cleaner look */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent); /* Subtler gradient */
+            transition: left 0.4s ease; /* Slightly faster transition */
         }
 
         .button:hover {
-            background-color: #003300;
-            transform: scale(1.2) rotate(10deg);
-            box-shadow: 0 0 40px limegreen, 0 0 60px limegreen inset;
-            color: white;
-            border: 3px solid darkgreen;
+            background-color: rgba(0, 255, 0, 0.05); /* Very subtle background hover */
+            transform: scale(1.02); /* Reduced scale on hover */
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.15); /* Subtler hover shadow */
+            color: #ffffff; /* Keep white text on hover */
+        }
+
+        .button:hover:before {
+            left: 100%;
         }
 
         section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s ease, transform 1s ease;
+            opacity: 0.95; /* Slightly more opaque section */
+            transform: translateY(10px); /* Reduced translateY */
+            transition: opacity 0.3s ease, transform 0.3s ease; /* Faster transitions */
             display: none;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 30px;
-            border-radius: 10px;
-            margin: 20px auto;
-            width: 80%;
-            box-shadow: 0 0 10px limegreen;
+            background: rgba(0, 0, 0, 0.8); /* Less opaque section background */
+            padding: 20px; /* Reduced section padding */
+            border-radius: 5px; /* Less rounded corners */
+            margin: 15px auto;
+            width: 85%;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2); /* Subtler section shadow */
+            border: 1px solid #00ff00;
         }
 
         section.active {
             opacity: 1;
             transform: translateY(0);
             display: block;
-            animation: fadeIn 0.5s ease-in-out;
+            animation: fadeIn 0.3s ease-in-out; /* Faster fade-in */
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(15px); /* Reduced translateY in fade-in */
             }
             to {
                 opacity: 1;
@@ -140,60 +172,119 @@
             }
         }
 
-        /* New Styling for Email and Phone */
+        /* Email and Phone - Keep styling */
         .email, .phone {
-            color: deepskyblue;
-            text-shadow: 0 0 15px deepskyblue;
-            font-size: 1.2em;
-            text-decoration: none; /* إزالة الخط تحت الرابط */
+            color: #a8b2d1;
+            font-size: 1em; /* Slightly smaller font size */
+            text-decoration: none;
         }
 
         .email:visited {
-            color: deepskyblue; /* ثابت اللون بعد الضغط */
+            color: #a8b2d1;
         }
 
-        /* Increased font size for "And yours could be next." */
+        /* Next Text - Reduced size and shadow */
         #nextText {
-            font-size: 3em;
-            font-weight: bold;
-            text-shadow: 0 0 30px limegreen;
+            font-size: 2em; /* Adjusted nextText font size for smaller screens, still impactful */
+            margin-top: 25px; /* Adjusted margin for smaller screens */
         }
 
-        /* Make video responsive */
+        /* Responsive Design - Keep as is, already optimized */
         @media (max-width: 768px) {
             #video-background {
                 object-position: center;
             }
 
             h1, h2 {
-                font-size: 1.8em;
+                font-size: 1.1em;
             }
 
             p, .button {
-                font-size: 1em;
+                font-size: 0.9em;
             }
+
+            .content {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .button {
+                padding: 5px;
+            }
+
+            section {
+                padding: 15px;
+            }
+            #nextText {
+            font-size: 1em; /* Reduced font size */
+            font-weight: bold;
+        }
+        .content nav{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
         }
 
-        /* Progress Bar */
+        /* Progress Bar - Subtler style */
         #progress-bar-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
-            background: rgba(0, 0, 0, 0.5);
+            height: 3px; /* Thinner progress bar */
+            background: rgba(10, 25, 47, 0.3); /* More transparent background */
             z-index: 1000;
         }
 
         #progress-bar {
             width: 0;
             height: 100%;
-            background-color: limegreen;
-            transition: width 2s ease-in-out;
+            background: linear-gradient(90deg, #00ff00, #39ff14);
+            box-shadow: none; /* Removed progress bar shadow for cleaner look */
+            transition: width 0.6s ease-in-out; /* Slightly faster progress bar transition */
+        }
+
+        /* Glitch Effect - Removed for professional look and speed */
+        /*
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+        */
+
+
+        /* Loading Animation - Faster and simpler */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading:after {
+            content: "INITIALIZING...";
+            color: #00ff00;
+            animation: loading 1.5s steps(2, end) infinite; /* Stepped animation for faster, less smooth effect */
+        }
+
+        @keyframes loading {
+            50% { opacity: 0.8; } /* Slightly higher opacity at peak */
         }
     </style>
 </head>
 <body>
+    <div class="loading"></div>
     <video id="video-background" autoplay loop muted>
         <source src="https://videos.pexels.com/video-files/11584395/11584395-uhd_2560_1440_60fps.mp4" type="video/mp4">
         Your browser does not support the video tag.
@@ -201,18 +292,20 @@
 
     <div id="matrix"></div>
     <div class="content">
-        <h1 class="blink">Welcome to My Pentesting World</h1>
+        <h1>Welcome to My Pentesting World</h1>
         <h2>Ethical Hacking & Security</h2>
-        <p>Every day, hackers around the world are scanning the web for vulnerable websites to target</p>
-        <h1 class="blink" id="nextText">And yours could be next.</h1>
+        <p>Every day, hackers around the world are scanning the web for vulnerable websites to target. Ensuring robust cybersecurity is more critical than ever.  My mission is to help you secure your digital presence and prevent cyber threats before they impact your operations.</p>
+        <h1 id="nextText">And yours could be next.</h1>
         <nav>
             <button class="button" onclick="showContent('about')">About Me</button>
             <button class="button" onclick="showContent('services')">Services</button>
             <button class="button" onclick="showContent('contact')">Contact</button>
+            <button class="button" onclick="openWhatsAppChat()">Message</button>
         </nav>
         <section id="about">
             <h2>About Me</h2>
             <p>I'm an ethical hacker with a passion for penetration testing and network security. I specialize in identifying vulnerabilities in web applications, networks, and systems, and securing them against potential threats.</p>
+            <p>I offer a comprehensive suite of cybersecurity services designed to rigorously assess and fortify your digital defenses. My services include: <b>Web Application Penetration Testing</b>, meticulously examining your web applications for vulnerabilities; <b>Network Penetration Testing</b>, testing the security of your network infrastructure; and <b>Vulnerability Assessments</b>, identifying and mitigating potential security weaknesses.</p>
         </section>
         <section id="services">
             <h2>Services</h2>
@@ -220,7 +313,11 @@
         </section>
         <section id="contact">
             <h2>Contact</h2>
-            <p>Email: <a href="mailto:morcosemad00@gmail.com?subject=Message from Website&body=Hello, I would like to contact you regarding..." class="email" target="_blank" id="emailLink">morcosemad00@gmail.com</a></p>
+            <h2>Let's Connect</h2>
+            <p>
+                I am readily available to discuss your cybersecurity needs, whether for collaborations, in-depth security consultations, or to address any specific inquiries you might have. Please do not hesitate to reach out to explore how my expertise can contribute to strengthening your digital security framework.  Looking forward to connecting and discussing how we can work together to enhance your security.
+            </p>
+            <p>Email: <a href="mailto:morcosemad00@gmail.com?subject=Security Inquiry from Website&body=Hello, I am interested in discussing security services for my organization/project." class="email" target="_blank" id="emailLink">morcosemad00@gmail.com</a></p>
             <p>WhatsApp: <a href="https://wa.me/201205750253" class="phone" target="_blank">+201205750253</a></p>
         </section>
     </div>
@@ -281,6 +378,17 @@
         document.addEventListener('DOMContentLoaded', () => {
             showContent('about');
         });
+
+        // Loading screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.loading').style.display = 'none';
+            }, 1500); // Reduced loading screen time to 1.5 seconds
+        });
+
+        function openWhatsAppChat() {
+            window.open('https://wa.me/201205750253?text=Hello, I am interested in your services.', '_blank');
+        }
     </script>
 </body>
 </html>

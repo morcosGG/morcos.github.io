@@ -11,8 +11,9 @@
             overflow: hidden;
             font-family: 'Fira Code', monospace;
             color: limegreen;
-            background: black;
+            background: linear-gradient(45deg, #111, #333);
             position: relative;
+            cursor: url('https://cdn.pixabay.com/photo/2018/03/05/16/10/mouse-3194372_960_720.png'), auto;
         }
 
         /* Video Background */
@@ -24,8 +25,8 @@
             height: 100vh;
             object-fit: cover;
             z-index: -1;
-            object-position: center;
-            filter: brightness(0.8); /* Dim video for better contrast */
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         /* Matrix Effect */
@@ -37,7 +38,6 @@
             height: 100%;
             z-index: -2;
             overflow: hidden;
-            pointer-events: none; /* Disable interaction with matrix effect */
         }
 
         .matrix-column {
@@ -77,6 +77,11 @@
 
         h1, h2, p {
             text-shadow: 0 0 15px limegreen;
+            background: linear-gradient(45deg, limegreen, deepskyblue);
+            -webkit-background-clip: text;
+            color: transparent;
+            font-family: 'Fira Code', monospace;
+            letter-spacing: 0.05em;
         }
 
         h1.blink {
@@ -92,12 +97,23 @@
             font-size: 1.2em;
             transition: 0.3s ease;
             box-shadow: 0 0 5px limegreen;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .button:hover {
             background-color: darkgreen;
             color: white;
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
             box-shadow: 0 0 10px limegreen;
         }
 
@@ -109,6 +125,8 @@
             margin: 20px auto;
             width: 80%;
             box-shadow: 0 0 10px limegreen;
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         section.active {
@@ -117,8 +135,14 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* New Styling for Email and Phone */
@@ -135,10 +159,38 @@
             text-shadow: 0 0 30px limegreen;
         }
 
+        /* Make video responsive */
+        @media (max-width: 768px) {
+            #video-background {
+                object-position: center;
+            }
+
+            h1, h2 {
+                font-size: 1.8em;
+            }
+
+            p, .button {
+                font-size: 1em;
+            }
+        }
+
+        /* Scroll animation */
+        window.addEventListener('scroll', function () {
+            let sections = document.querySelectorAll('section');
+            sections.forEach((section) => {
+                let top = section.getBoundingClientRect().top;
+                if (top < window.innerHeight - 150) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+        });
+
     </style>
 </head>
 <body>
-    <video id="video-background" autoplay loop muted playsinline>
+    <video id="video-background" autoplay loop muted>
         <source src="https://videos.pexels.com/video-files/11584395/11584395-uhd_2560_1440_60fps.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -190,14 +242,6 @@
             }
             column.innerHTML = text;
         }
-
-        // Ensure the video never stops
-        var video = document.getElementById('video-background');
-        video.addEventListener('ended', function() {
-            video.currentTime = 0;
-            video.play();
-        }, false);
-
     </script>
 </body>
 </html>

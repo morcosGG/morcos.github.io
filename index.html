@@ -5,37 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pentesting Homepage</title>
     <style>
+        /* General Styles */
         body {
-            background-color: black;
-            color: limegreen;
+            margin: 0;
+            overflow: hidden;
             font-family: 'Courier New', Courier, monospace;
+            color: limegreen;
+            position: relative;
+        }
+
+        /* Video Background */
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;  /* ضمان تغطية الشاشة بالكامل دون التشويه */
+            z-index: -1;
+            pointer-events: none; /* منع التداخل مع العناصر الأخرى */
+        }
+
+        /* Matrix Effect */
+        #matrix {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .matrix-column {
+            display: inline-block;
+            width: 1em;
+            font-size: 20px;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            white-space: nowrap;
+            color: limegreen;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Content Styles */
+        .content {
+            position: relative;
+            z-index: 1;
             text-align: center;
             padding: 50px;
         }
+
         h1 {
             font-size: 3em;
             animation: blink 1s infinite;
         }
+
         @keyframes blink {
             50% { opacity: 0; }
         }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 {
+            font-size: 1.5em;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
         nav ul {
-            list-style-type: none; /* إلغاء النقاط */
+            list-style-type: none;
             padding: 0;
             margin: 0;
         }
+
         nav ul li {
             display: inline;
             margin-right: 20px;
         }
-        nav ul li a {
-            text-decoration: none;
-            color: limegreen;
-            font-size: 1.2em;
-        }
-        nav ul li a:hover {
-            color: darkgreen;
-        }
+
         .button {
             background-color: limegreen;
             color: black;
@@ -46,75 +105,81 @@
             margin: 10px;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
+
         .button:hover {
             background-color: darkgreen;
             color: white;
             transform: scale(1.1);
         }
+
         section {
             margin-top: 30px;
             display: none;
+            background-color: transparent;
+            border: none;
         }
+
         section.active {
             display: block;
         }
+
         section h2 {
             font-size: 2em;
             text-decoration: underline;
         }
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
+
+        /* تحديث التنسيق لقسم الـ Contact */
+        #contact {
+            background-color: rgba(0, 0, 0, 0.7);  /* جعل الخلفية داكنة قليلاً */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            background-color: transparent;  /* إزالة الخلفية الخضراء */
+            padding: 20px;
+            text-align: center; /* جعل النص في المنتصف */
+            color: limegreen;  /* تغيير لون النص للأخضر */
+        }
+
+        .contact-info h3 {
+            font-size: 2em;
             margin-bottom: 20px;
         }
-        /* New styles for Contact form */
-        form {
-            background-color: #1c3b1f; /* Dark green background */
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        }
-        form label {
-            color: limegreen;
-            display: block;
-            margin-bottom: 5px;
-            font-size: 1.1em;
-        }
-        form input, form textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 2px solid limegreen;
-            background-color: #2d572f;
-            color: white;
-            font-size: 1.1em;
-            border-radius: 5px;
-        }
-        form input:focus, form textarea:focus {
-            outline: none;
-            border-color: darkgreen;
-            background-color: #3b7f50;
-        }
-        form button {
-            background-color: limegreen;
-            color: black;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
+
+        .contact-info p {
             font-size: 1.2em;
-            margin-top: 10px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            border-radius: 5px;
+            margin-bottom: 20px;
         }
-        form button:hover {
-            background-color: darkgreen;
-            color: white;
-            transform: scale(1.1);
+
+        .contact-info a {
+            color: limegreen;
+            font-size: 1.5em;  /* تكبير حجم الخط */
+            text-decoration: none;  /* إزالة الخط تحت الرابط */
         }
+
+        .contact-info a:hover {
+            color: darkgreen;
+        }
+
+        /* تحديث تنسيق النصوص في About Me و Services */
+        section h2 {
+            font-size: 2em;
+            color: limegreen;
+            text-decoration: underline;
+            margin-bottom: 20px;
+        }
+
+        section p {
+            font-size: 1.2em;
+            color: limegreen;
+        }
+
         @media (max-width: 600px) {
-            body {
+            .content {
                 padding: 20px;
             }
             h1 {
@@ -128,61 +193,84 @@
     </style>
 </head>
 <body>
-    <h1>Welcome to My Pentesting World</h1>
-    <img src="https://via.placeholder.com/150" alt="My Picture" class="profile-img">
-    <p>Ethical Hacking & Security</p>
+    <!-- Video Background -->
+    <video id="video-background" autoplay loop muted>
+        <source src="https://videos.pexels.com/video-files/11584395/11584395-uhd_2560_1440_60fps.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
-    <nav>
-        <ul>
-            <li><button class="button" onclick="showContent('about')">About Me</button></li>
-            <li><button class="button" onclick="showContent('services')">Services</button></li>
-            <li><button class="button" onclick="showContent('contact')">Contact</button></li>
-        </ul>
-    </nav>
+    <!-- Matrix Effect -->
+    <div id="matrix"></div>
 
-    <section id="about" class="content-section">
-        <h2>About Me</h2>
-        <p>I'm an ethical hacker with a passion for penetration testing and network security. I specialize in identifying vulnerabilities in web applications, networks, and systems, and securing them against potential threats.</p>
-    </section>
+    <!-- Content -->
+    <div class="content">
+        <h1>Welcome to My Pentesting World</h1>
+        <h2><p>Ethical Hacking & Security</p></h2>
 
-    <section id="services" class="content-section">
-        <h2>Services</h2>
-        <div>
-            <p>Pentesting Web Applications</p>
-            <p>Network Penetration Testing</p>
-            <p>Vulnerability Assessments</p>
+        <div class="hero-text">
+            <h3 style="color: white;">Every day, hackers around the world are scanning the web for vulnerable websites to target</h3>
+            <h1 style="font-size: 3em;">And yours could be next.</h1>
         </div>
-    </section>
 
-    <section id="contact" class="content-section">
-        <h2>Contact</h2>
-        <form action="mailto:morcosemad00@gmail.com" method="post" enctype="text/plain">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+        <nav>
+            <ul>
+                <li><button class="button" onclick="showContent('about')">About Me</button></li>
+                <li><button class="button" onclick="showContent('services')">Services</button></li>
+                <li><button class="button" onclick="showContent('contact')">Contact</button></li>
+            </ul>
+        </nav>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+        <section id="about" class="content-section">
+            <h2>About Me</h2>
+            <p>I'm an ethical hacker with a passion for penetration testing and network security. I specialize in identifying vulnerabilities in web applications, networks, and systems, and securing them against potential threats.</p>
+        </section>
 
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
+        <section id="services" class="content-section">
+            <h2>Services</h2>
+            <div>
+                <p>Pentesting Web Applications</p>
+                <p>Network Penetration Testing</p>
+                <p>Vulnerability Assessments</p>
+            </div>
+        </section>
 
-            <button type="submit">Send</button>
-        </form>
-    </section>
+        <section id="contact" class="content-section">
+            <h2>Contact</h2>
+            <div class="contact-info">
+                <p>If you want to reach out for collaborations or inquiries, feel free to email me at:</p>
+                <p><a href="mailto:morcosemad00@gmail.com">morcosemad00@gmail.com</a></p>
+            </div>
+        </section>
+    </div>
 
     <script>
+        // Show/Hide Sections
         function showContent(contentId) {
-            // Hide all sections
-            var sections = document.querySelectorAll('.content-section');
-            sections.forEach(function(section) {
-                section.classList.remove('active');
-            });
-
-            // Show the clicked section
-            var activeSection = document.getElementById(contentId);
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            const activeSection = document.getElementById(contentId);
             if (activeSection) {
                 activeSection.classList.add('active');
             }
+        }
+
+        // Matrix Background Animation with 0 and 1
+        const matrix = document.getElementById('matrix');
+        const characters = '01';
+        const columns = Math.floor(window.innerWidth / 16); // Adjust based on font size
+
+        for (let i = 0; i < columns; i++) {
+            const column = document.createElement('div');
+            column.className = 'matrix-column';
+            column.style.animationDuration = `${Math.random() * 5 + 3}s`; // Randomize speed
+            column.style.animationDelay = `${Math.random() * 2}s`; // Randomize delay
+            matrix.appendChild(column);
+
+            let text = '';
+            for (let j = 0; j < 50; j++) {
+                text += characters[Math.floor(Math.random() * characters.length)] + '<br>';
+            }
+            column.innerHTML = text;
         }
     </script>
 </body>

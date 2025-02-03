@@ -24,8 +24,8 @@
             height: 100vh;
             object-fit: cover;
             z-index: -1;
-            /* Use lower resolution video for mobile devices */
             object-position: center;
+            filter: brightness(0.8); /* Dim video for better contrast */
         }
 
         /* Matrix Effect */
@@ -37,6 +37,7 @@
             height: 100%;
             z-index: -2;
             overflow: hidden;
+            pointer-events: none; /* Disable interaction with matrix effect */
         }
 
         .matrix-column {
@@ -197,12 +198,6 @@
             video.play();
         }, false);
 
-        // Reduce CPU load by throttling matrix animation (using requestAnimationFrame)
-        function animateMatrix() {
-            requestAnimationFrame(animateMatrix);
-            // More efficient handling of matrix rendering
-        }
-        animateMatrix();
     </script>
 </body>
 </html>

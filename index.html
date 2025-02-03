@@ -272,6 +272,11 @@
             }
             column.innerHTML = text;
         }
+        // Ensure video plays after page refresh
+        window.onload = function() {
+            var video = document.getElementById("video-background");
+            video.play();
+        };
     </script>
 </body>
 </html>

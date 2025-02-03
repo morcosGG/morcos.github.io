@@ -132,6 +132,67 @@
             text-shadow: 0 0 30px limegreen;
         }
 
+        /* Media Queries for responsiveness */
+        @media (max-width: 1200px) {
+            .content {
+                padding: 40px;
+            }
+
+            h1, h2, p {
+                font-size: 1.5em;
+            }
+
+            .button {
+                font-size: 1em;
+            }
+
+            #nextText {
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+
+            h1, h2, p {
+                font-size: 1.2em;
+            }
+
+            .button {
+                font-size: 0.9em;
+                padding: 8px 16px;
+            }
+
+            #nextText {
+                font-size: 1.5em;
+            }
+
+            section {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1, h2, p {
+                font-size: 1em;
+            }
+
+            .button {
+                font-size: 0.8em;
+                padding: 6px 12px;
+            }
+
+            #nextText {
+                font-size: 1.2em;
+            }
+
+            section {
+                width: 95%;
+            }
+        }
+
     </style>
 </head>
 <body>
